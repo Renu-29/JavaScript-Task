@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #287cc0;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Instagram Login</h2>
+    
+    <form id="loginForm" onsubmit="return validateForm()">
+        <input type="text" id="loginField" placeholder="Username, Email or Phone" />
+        <span id="loginFieldError" class="error"></span>
+        
+        <input type="password" id="password" placeholder="Password" />
+        <span id="passwordError" class="error"></span>
+
+        <button type="submit">Log In</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        const loginField = document.getElementById('loginField').value;
+        const password = document.getElementById('password').value;
+
+        let valid = true;
+
+        // Clear previous error messages
+        document.getElementById('loginFieldError').innerText = '';
+        document.getElementById('passwordError').innerText = '';
+
+        // Validate login field (can be email, phone number, or username)
+        if (validateEmail(loginField) || validatePhoneNumber(loginField) || validateUsername(loginField)) {
+            valid = true;
+        } else {
+            document.getElementById('loginFieldError').innerText = 'Enter a valid email (@gmail.com), phone number (10 digits), or username (no spaces, no digits).';
+            valid = false;
+        }
+
+        // Validate password
+        if (!validatePassword(password)) {
+            document.getElementById('passwordError').innerText = 'Password must be at least 8 characters long, with at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special symbol.';
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    function validateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        return emailRegex.test(email);
+    }
+
+    function validatePhoneNumber(phoneNumber) {
+        const phoneRegex = /^\d{10}$/;
+        return phoneRegex.test(phoneNumber);
+    }
+
+    function validateUsername(username) {
+        const usernameRegex = /^[a-zA-Z]+$/;
+        return usernameRegex.test(username);
+    }
+
+    function validatePassword(password) {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    }
+</script>
+
+</body>
+</html>

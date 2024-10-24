@@ -1,0 +1,47 @@
+// Define the BankAccount object
+function BankAccount(accountNumber, accountHolderName, balance) {
+    this.accountNumber = accountNumber;
+    this.accountHolderName = accountHolderName;
+    this.balance = balance;
+
+    // Method to deposit money into the account
+    this.deposit = function(amount) {
+        if (amount > 0) {
+            this.balance += amount;
+            console.log(`${amount} deposited successfully! New balance: ${this.balance}`);
+        } else {
+            console.log("Deposit amount must be positive.");
+        }
+    };
+
+    // Method to withdraw money from the account
+    this.withdraw = function(amount) {
+        if (amount > 0 && amount <= this.balance) {
+            this.balance -= amount;
+            console.log(`${amount} withdrawn successfully! Remaining balance: ${this.balance}`);
+        } else if (amount > this.balance) {
+            console.log("Insufficient balance.");
+        } else {
+            console.log("Withdrawal amount must be positive.");
+        }
+    };
+
+    // Method to check the balance
+    this.checkBalance = function() {
+        console.log(`Current balance: ${this.balance}`);
+    };
+}
+
+// Example usage:
+
+// Create a new bank account
+const myAccount = new BankAccount(12345678, "John Doe", 5000);
+
+// Deposit money
+myAccount.deposit(1000);  // Output: 1000 deposited successfully! New balance: 6000
+
+// Withdraw money
+myAccount.withdraw(2000); // Output: 2000 withdrawn successfully! Remaining balance: 4000
+
+// Check balance
+myAccount.checkBalance(); // Output: Current balance: 4000

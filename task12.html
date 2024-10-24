@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Translation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Google Translation</h1>
+        <label for="language-select">Select Language:</label>
+        <select id="language-select" onchange="translateText()">
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="french">French</option>
+            <option value="telugu">Telugu</option>
+            <option value="dutch">Dutch</option>
+        </select>
+
+        <p id="translated-text">Hi, welcome to Google translation</p>
+    </div>
+
+    <script>
+        function translateText() {
+            const translations = {
+                english: "Hi, welcome to Google translation",
+                hindi: "नमस्ते, गूगल अनुवाद में आपका स्वागत है",
+                french: "Bonjour, bienvenue sur Google Traduction",
+                telugu: "హాయ్, గూగుల్ అనువాదంలో మీకు స్వాగతం",
+                dutch: "Hallo, welkom bij Google Translate"
+            };
+
+            const selectedLanguage = document.getElementById("language-select").value;
+            document.getElementById("translated-text").innerText = translations[selectedLanguage];
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Magnification</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        .magnified-image {
+            position: absolute;
+            transform: scale(2); /* Magnification factor */
+            border: 2px solid #000;
+            display: none;
+            pointer-events: none; /* Prevent interaction with the magnified image */
+        }
+        img {
+            width: 300px; /* Original image width */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-container">
+    <img id="image" src="https://via.placeholder.com/300" alt="Sample Image" />
+    <img id="magnifiedImage" class="magnified-image" src="https://via.placeholder.com/300" alt="Magnified Image" />
+</div>
+
+<script>
+    // JavaScript code here
+    const imageContainer = document.querySelector('.image-container');
+    const image = document.getElementById('image');
+    const magnifiedImage = document.getElementById('magnifiedImage');
+
+    // Function to show the magnified image
+    imageContainer.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = image.getBoundingClientRect();
+        const x = e.clientX - left;
+        const y = e.clientY - top;
+
+        // Set the position of the magnified image
+        magnifiedImage.style.left = `${e.clientX}px`;
+        magnifiedImage.style.top = `${e.clientY}px`;
+        magnifiedImage.style.display = 'block';
+        magnifiedImage.style.transform = `scale(2) translate(-${x * 2}px, -${y * 2}px)`; // Adjust position and scaling
+    });
+
+    // Function to hide the magnified image
+    imageContainer.addEventListener('mouseleave', () => {
+        magnifiedImage.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
